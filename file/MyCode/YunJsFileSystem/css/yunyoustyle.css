@@ -1,0 +1,188 @@
+@charset "utf-8";
+/* CSS Document */
+/*@font-face {
+  font-family:'经典繁毛楷'; 
+  src: url('../fonts/jdfmk.ttf') format('truetype');
+  } */
+    a:focus{
+      outline: none;
+    }
+
+    body {
+      background: #616161 url(../img/background_blur.jpg) center no-repeat;
+      background-attachment:fixed;
+      background-size:cover;
+      position: relative;
+      font-family:Microsoft YaHei;
+    }
+
+    button {
+      background: linear-gradient(-45deg, #ffffff, #000000);
+      outline: none;
+      overflow: hidden;
+      position: relative;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+    }
+    button:hover:before {
+      left: 130%;
+      transition: .4s;
+    }
+    button:before {
+      content: '';
+      background: rgba(255, 255, 255, 0.3);
+      height: 100%;
+      width: 65px;
+      position: absolute;
+      top: 0;
+      left: -180%;
+      transform: skew(-45deg);
+      transition: 0s;
+    }
+
+    hr{
+     opacity:0.15;
+   }
+
+   .navbar-inverse {
+    background-color:rgba(0,0,0,0.8);
+    border:none;
+  }
+  /*按钮重载*/
+  .btn-inverse {
+    color:#fff;
+    background-color:rgba(0,0,0,0.8);
+    border:none;
+  }
+  .btn-inverse:focus,
+  .btn-inverse.focus {
+    color:#fff;
+    background-color:rgba(0,0,0,0.5);
+    border:none;
+  }
+  .btn-inverse:hover {
+    color:#fff;
+    background-color:rgba(0,0,0,0.6);
+    border:none;
+  }
+  .btn-inverse:active,
+  .btn-inverse.active,
+  .open > .dropdown-toggle.btn-inverse {
+    color:#fff;
+    background-color:rgba(0,0,0,0.7);
+    border:none;
+  }
+  .btn-inverse:active:hover,
+  .btn-inverse.active:hover,
+  .open > .dropdown-toggle.btn-inverse:hover,
+  .btn-inverse:active:focus,
+  .btn-inverse.active:focus,
+  .open > .dropdown-toggle.btn-inverse:focus,
+  .btn-inverse:active.focus,
+  .btn-inverse.active.focus,
+  .open > .dropdown-toggle.btn-inverse.focus {
+    color:#fff;
+    background-color:rgba(0,0,0,0.7);
+    border:none;
+  }
+  /*---*/
+  .modal-content{
+   background:rgba(255,255,255,0.9);
+/*   background-image:url(../img/background_blur.jpg);*/
+   background-position:center;
+   background-size:cover;
+   margin-top:120px;
+
+ }
+ .yunyou-bgblur{
+  box-shadow:0px 0px 20px #000;
+  -moz-box-shadow:0px 0px 20px #000;
+  -webkit-box-shadow:0px 0px 20px #000;
+  border-radius: 5px;
+}
+.yunyou-input{
+	background-color:rgba(255,255,255,0.9);
+}
+
+.pagination > li.active >a,
+.pagination > li.active >a:hover,
+.pagination > li.active >a:focus{
+  background-color: #fff;
+  color: #000;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  background-color:rgba(0,0,0,0.5);;
+  border: 0px solid #ddd;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  z-index: 2;
+  color: #000000;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.pagination > li.active > a{
+  color: #000;
+}
+.pagination >li.disabled > a,
+.pagination >li.disabled > a:hover,
+.pagination >li.disabled > a:focus{
+  background-color: rgba(33,33,33,0.9);
+}
+
+.yunyou-background{
+  background-color: rgba(255,255,255,0.9);
+}
+.yunyou-panel{
+ padding:20px;
+}
+
+.nav > li > a {
+  color: #AAA;
+}
+.nav > li > a:hover,
+.nav > li > a:focus{
+  text-decoration: none;
+  background-color: rgba(0,0,0,0.4);
+  color: #fff;
+  -webkit-transition: all 1s;-moz-transition: all 1s;-o-transition: all 1s;
+}
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  text-decoration: none;
+  background-color: rgba(0,0,0,0.4);
+  color: #fff;
+  -webkit-transition: all 1s;-moz-transition: all 1s;-o-transition: all 1s;
+}
+
+.yunyou-fixed{
+  position: fixed;
+}
+.yunyou-block{
+  border: 1px solid rgba(0,0,0,0.4);
+}
+.Absolute-Center {  
+  margin: auto;  
+  position: absolute;  
+  top: 0; left: 0; bottom: 0; right: 0;  
+}  
+
+.yunyou-canvas{
+ background-color:rgba(255,255,255,0.5);
+ display: block;
+ margin:0 auto;
+ border:1px solid #aaa;
+}

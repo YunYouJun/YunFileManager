@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yunyou-FileSystem</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../logo.ico" media="screen" />
+    <link rel="Bookmark" href="../logo.ico">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/file-world.css">
+</head>
+
+<body>
+    <h3 id="js-link-info" class="text-center text-success"><span id="curTime"></span></h3>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>大小</th>
+                    <th>可读</th>
+                    <th>可写</th>
+                    <th>可执行</th>
+                    <th>创建时间</th>
+                    <th>修改时间</th>
+                    <th>访问时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tr align="center">
+                <td>1</td>
+            </tr>
+        </table>
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#file-navbar-collapse" aria-expanded="false">
+                    <span class="sr-only">FileManager</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html" title="主目录">
+                    <span class="glyphicon glyphicon-home navbar-brand-active"></span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="file-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="javascript:;" onclick="show('createFile')" title="新建文件">
+                            <span class="glyphicon glyphicon-file"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" onclick="show('createFolder')" title="新建文件夹">
+                            <span class="glyphicon glyphicon-folder-open"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" title="返回上级目录" onclick="goBack('<?php echo $back;?>')">
+                            <span class="glyphicon glyphicon-arrow-left"></span>
+                        </a>
+                    </li>
+                </ul>
+                <form action="index.html" method="post" class="navbar-form navbar-left text-center" enctype="multipart/form-data">
+                    <div id="createFolder" class="form-inline" style="display:none;">
+                        <div class="form-group">
+                            <input type="text" id="dirname" class="form-control" name="dirname" placeholder="请输入文件夹名称" />
+                            <input type="hidden" name="path" value="<?php echo $path;?>" />
+                            <input type="hidden" name="act" value="createFolder" />
+                        </div>
+                        <button class="btn btn-default" type="submit">
+                            <span class="fa fa-folder-open"></span> 创建文件夹
+                        </button>
+                    </div>
+                    <div id="createFile" class="form-inline" style="display:none;">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="filename" name="filename" placeholder="请输入文件名称" />
+                            <input type="hidden" name="path" value="<?php echo $path;?>" />
+                            <input type="hidden" name="act" value="createFile" />
+                        </div>
+                        <button class="btn btn-default" type="submit">
+                            <span class="fa fa-file"></span> 创建文件
+                        </button>
+                    </div>
+                </form>
+                <form class="navbar-form navbar-right">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="keyword">
+                        <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                          <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </nav>
+</body>
+<script type="text/javascript" src="../js/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/FileSystem/FileSystem.js"></script>
+<script type="text/javascript">
+$('.nav li a').click(function() {
+    $('.nav li,.navbar-brand').removeClass('active');
+    $('.glyphicon-home').removeClass('navbar-brand-active');
+    $(this).parent().addClass('active');
+});
+</script>
+<script type="text/javascript">
+function show(dis) {
+    $(".navbar-form .form-inline").hide();
+    document.getElementById(dis).style.display = "block";
+}
+
+function delFile(filename, path) {
+    if (window.confirm("您确定要删除文件吗?删除之后无法恢复哦!")) {
+        location.href = "index.php?act=delFile&filename=" + filename + "&path=" + path;
+    }
+}
+
+function delFolder(dirname, path) {
+    if (window.confirm("您确定要删除嘛?删除之后无法恢复哟!!!")) {
+        location.href = "index.php?act=delFolder&dirname=" + dirname + "&path=" + path;
+    }
+}
+
+function goBack($back) {
+    // location.href="index.php?path="+$back;
+}
+</script>
+
+</html>

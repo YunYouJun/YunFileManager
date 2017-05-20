@@ -1,0 +1,19 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(www.)?fantasystar2.yunyoujun.online$
+RewriteCond %{REQUEST_URI} !^/fantasystar/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ /fantasystar/$1
+RewriteCond %{HTTP_HOST} ^(www.)?fantasystar2.yunyoujun.online$
+RewriteRule ^(/)?$ fantasystar/index.html [L]
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(www.)?clashofclans2.yunyoujun.online$
+RewriteCond %{REQUEST_URI} !^/clashofclans/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ /clashofclans/$1
+RewriteCond %{HTTP_HOST} ^(www.)?clashofclans2.yunyoujun.online$
+RewriteRule ^(/)?$ clashofclans/index.html [L]

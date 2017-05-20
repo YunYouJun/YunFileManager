@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>CanvasTest</title>
+</head>
+<body>
+	<canvas id="c" width="500" height="500"></canvas>
+	<script type="text/javascript">
+		var c = document.querySelector("#c");
+		var ctx = c.getContext("2d");
+/*		var image = new Image();
+		image.onload = function(){
+			console.log("Loaded image");
+			ctx.drawImage(image,0,0,c.width,c.height);
+			var savedImage = c.toDataURL();
+			window.open(savedImage);
+		}
+
+		image.src = "image/头像.jpg";*/
+		
+		ctx.fillRect(100,100,100,100);
+		ctx.strokeRect(50,50,50,50);
+	</script>
+	<div id="MemeCreate"></div>
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+	<script type='text/javascript'>
+	$.get('MemeCreate.html',function(data){
+	$('#MemeCreate').html(data);
+	});
+	</script>
+</body>
+</html>

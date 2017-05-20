@@ -1,0 +1,3 @@
+MusicVisualize.prototype.visualize = function(first_argument) {
+	// body...
+};

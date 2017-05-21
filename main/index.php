@@ -53,7 +53,7 @@ $redirect="index.php?path={$path}";
 <body class="container-fluid">
 <?php include('../common/header.php');?>
 <?php include('../common/navbar.php'); ?>
-
+<?php showPath($path);?>
 <form action="index.php" method="post" class="text-center" enctype="multipart/form-data">
 
 	<div id="createFolder"  class="form-inline"  style="display:none;">
@@ -190,7 +190,7 @@ if($keyword){
 				<span class="fa fa-headphones" title="聆听"></span>
 			</a>
 		<?php }elseif(isVideo($val)){ ?>
-			<a class="btn btn-default" href="Watching.php?path=<?php echo $path;?>&filename=<?php echo $p2;?>&fileTitle=<?php echo $FileNameVal; ?>" target="_blank">
+			<a class="btn btn-default" href="Watching.php?path=<?php echo $path;?>&filename=<?php echo $p2;?>&fileTitle=<?php echo $FileNameVal; ?>#myvideo" target="_blank">
 				<span class="fa fa-video-camera" title="观看"></span>
 			</a>
 			<?php
@@ -206,7 +206,7 @@ if($keyword){
 			<a class="btn btn-default" href="index.php?act=copyFile&path=<?php echo $path;?>&filename=<?php echo $p;?>"><span class="glyphicon glyphicon-copy" title="复制"></span></a>
 			<a class="btn btn-default" href="index.php?act=cutFile&path=<?php echo $path;?>&filename=<?php echo $p;?>"><span class="glyphicon glyphicon-scissors" title="剪切"></span></a>
 			<a class="btn btn-default" href="javascript:;"  onclick="delFile('<?php echo $p;?>','<?php echo $path;?>')"><span class="glyphicon glyphicon-remove" title="删除"></span></a>
-			<a class="btn btn-default" href="doFileAction.php?act=downFile&path=<?php echo $path;?>&filename=<?php echo $p;?>">
+			<a class="btn btn-default" href="../main/doFileAction.php?act=downFile&path=<?php echo $path;?>&filename=<?php echo $p;?>">
 				<span class="glyphicon glyphicon-download-alt" title="下载"></span>
 			</a>
 		</div>

@@ -16,8 +16,13 @@
 	</head>
 	<body>
 	<div class="container">
-		<?php include('../common/header.php');?>
-		<audio id="mymusic" src="../file/MyMusic/雨宮天、高橋李依、茅野愛衣 - ちいさな冒険者.mp3" loop="loop">
+		<div class="page-header text-center">
+			<span class="fa fa-music medium-icon"></span>
+			<span class="medium-icon">&nbsp;—&nbsp;</span>
+			<span style="font-size: 222%;"><?php echo $fileTitle;?></span>
+		</div>
+
+		<audio id="mymusic" src="<?php echo $filename; ?>" loop="loop">
 			您的浏览器可能不支持音乐播放，请使用最新chrome浏览器。
 		</audio>
 	<div id="musixBox">
@@ -40,6 +45,7 @@
 		</canvas>
 	</div>
 	<!-- 进度条 -->
+	<div id="PlayerControl">
 	<div class="progress form-control" id="audioProgressBar" style="margin-bottom:5px;background:rgba(255,255,255,0.7);position: relative;" title="进度条">
 		<input type="range" name="" id="progress" min="0" max="100" value="60" style="position: absolute;z-index: 1;">
 		<div class="progress-bar progress-bar-striped active" id="dispalyProgress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="position: relative; width: 0%;">
@@ -68,15 +74,14 @@
        	</div>
        </div>
        <span class="input-group-btn">
-	      	<a class="btn btn-default" href="doFileAction.php?act=../main/downFile&path=<?php echo $path;?>&filename=<?php echo $filename;?>">
+	      	<a class="btn btn-default" href="../main/doFileAction.php?act=downFile&path=<?php echo $path;?>&filename=<?php echo $filename;?>">
 	       		<span class="glyphicon glyphicon-download-alt" title="下载"></span>
 	       	</a>
        </span>
     </div><!-- /input-group -->
-
-
+	</div>
 		<?php include('../common/footer.php');?>
-		</div>
+	</div>
 	</body>
 <script type="text/javascript">
 var box = $('#musixBox')[0];
@@ -122,7 +127,15 @@ types.click(function(){
 	draw.type = $(this).attr('data-type');
 });
 
+canvas.onclick=function(){
+	if(draw.type=='dot'){
+		for(var i=0;i<size;i++){
+			Dots.dotMode == 'random'? Dots[i].dx = 0:Dots[i].dx=Dots[i].dx2;
+		}
+		Dots.dotMode = Dots.dotMode=="static"?"random":"static";
 
+	}
+};
 
 </script>
 </html>

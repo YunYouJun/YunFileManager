@@ -125,7 +125,7 @@ echo $str;
 }elseif($act=="copyFolder"){
 		$str=<<<EOF
 	<form class="form-inline navbar-form navbar-left" action="index.php?act=doCopyFolder" method="post"> 
-		<input type="text" class="form-control" name="dstname" id="CopyFolderdstname" placeholder="填写文件夹复制到的目录"/>
+		<input type="text" class="form-control" name="dstname" id="CopyFolderdstname" placeholder="填写复制到的目录"/>
 		<input type="hidden" name="path" value="{$path}" />
 		<input type='hidden' name='dirname' value='{$dirname}' />
 		<button class="btn btn-default" type="submit">
@@ -141,7 +141,7 @@ echo $str;
 }elseif($act=="cutFolder"){
 			$str=<<<EOF
 	<form class="form-inline navbar-form navbar-left" action="index.php?act=doCutFolder" method="post"> 
-		<input type="text" class="form-control" name="dstname" id="CutFolderdstname" placeholder="填写文件剪切到的目录"/>
+		<input type="text" class="form-control" name="dstname" id="CutFolderdstname" placeholder="填写剪切到的目录"/>
 		<input type="hidden" name="path" value="{$path}" />
 		<input type='hidden' name='dirname' value='{$dirname}' />
 		<button class="btn btn-default" type="submit">
@@ -161,7 +161,7 @@ echo $str;
 }elseif($act=="copyFile"){
 				$str=<<<EOF
 	<form class="form-inline navbar-form navbar-left" action="index.php?act=doCopyFile" method="post"> 
-		<input type="text" class="form-control" name="dstname" id="CopyFiledstname" placeholder="填写文件复制到的沐浴露"/>
+		<input type="text" class="form-control" name="dstname" id="CopyFiledstname" placeholder="填写复制到的目录"/>
 		<input type="hidden" name="path" value="{$path}" />
 		<input type='hidden' name='filename' value='{$filename}' />
 		<button class="btn btn-default" type="submit">
@@ -177,7 +177,7 @@ echo $str;
 }elseif($act=="cutFile"){
 				$str=<<<EOF
 	<form class="form-inline navbar-form navbar-left" action="index.php?act=doCutFile" method="post"> 
-		<input type="text" class="form-control" name="dstname" id="CutFiledstname" placeholder="填写文件剪切到的目录"/>
+		<input type="text" class="form-control" name="dstname" id="CutFiledstname" placeholder="填写剪切到的目录"/>
 		<input type="hidden" name="path" value="{$path}" />
 		<input type='hidden' name='filename' value='{$filename}' />
 		<button class="btn btn-default" type="submit">
@@ -203,6 +203,7 @@ echo $str;
               <form class="navbar-form navbar-right">
                 <div class="input-group">
                   	<input type="text" class="form-control" placeholder="Search" name="keyword" value="<?php echo $keyword;?>">
+                  	<input type="hidden" name="path" value="<?php echo $path;?>">
 	                <span class="input-group-btn">
 		                <button type="submit" class="btn btn-default">
 		                	<span class="glyphicon glyphicon-search"></span>

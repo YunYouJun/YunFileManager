@@ -116,6 +116,9 @@ function showAlertMes($mes){
 		case 'CutFileSuccess':
 			showSuccessMsg('文件剪切成功！');
 			break;
+		case 'CutFolderSuccess':
+			showSuccessMsg('文件夹剪切成功！');
+			break;
 		case 'CutFileFail':
 			showDangerMsg('文件剪切失败！');
 			break;
@@ -165,6 +168,23 @@ function showAlertMes($mes){
 	}
 }
 
-
-
-
+function showPath($path){
+	$path = str_replace("../file","",$path);
+	$folderPath = "../file";
+	$folders = explode('/', $path);
+	$foldnum = count($folders);
+	echo '<ol class="breadcrumb">';
+	echo 'Path > ';
+	if($foldnum>1){
+		for($i=0;$i<$foldnum-1;$i++){
+			if($folders[$i]){
+				$folderPath = $folderPath.'/'.$folders[$i];
+				echo '<li><a href="index.php?path='.$folderPath.'">'.$folders[$i].'</a></li>';
+			}else{
+				echo '<li><a href="index.php?path=../file">..</a></li>';
+			}
+		}
+	}
+	echo '<li class="active">'.$folders[$foldnum-1].'</li>';
+	echo '</ol>';
+}

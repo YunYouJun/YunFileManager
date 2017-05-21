@@ -76,24 +76,32 @@ function getDots(){
 	for(i = 0;i<size;i++){
 		var x = random(0,width);
 		var y = random(0,height);
-		var color = "rgba("+random(0,255)+","+random(0,255)+","+random(0,255)+","+random(0,255)+")";
+		var color = "rgba("+random(0,255)+","+random(0,255)+","+random(0,255)+","+random(5,250)+")";
+		// var color = "rgba(0,0,0,100)";
+		var dx = random(1,4);
 		Dots.push({
 			x:x,
 			y:y,
-			color:color
+			dx:dx,
+			dx2:dx,
+			color:color,
+			cap : 0,
+			dotMode:'random'
 		});
 	}
 }
 
 function resizeCanvas(){
 	width = box.clientWidth;
-	height = $(window).height()-300;
+	height = $(window).height()-$('footer').height()-$('#PlayerControl').height()-$('.page-header').height()-200;
 	canvas.width = width;
 	canvas.height = height;
 	line = ctx.createLinearGradient(0,0,0,height);
-	line.addColorStop(0,"red");
-	line.addColorStop(0.5,"yellow");
-	line.addColorStop(1,"green");
+	// line.addColorStop(0,"red");
+	// line.addColorStop(0.5,"yellow");
+	// line.addColorStop(1,"green");
+	line.addColorStop(0,"rgba(102,204,255,0.9)");
+	line.addColorStop(1,"rgba(0,0,0,0.9)");
 	getDots();
 }
 
@@ -101,21 +109,37 @@ function resizeCanvas(){
 function draw(arr){
 	ctx.clearRect(0,0,width,height);
 	var w = width/size;
+	var cw = w*0.6;
+	var capH = cw>10?10:cw;
+	var gap = 20;
 	ctx.fillStyle = line;
 	for(var i=0; i<size;i++){
+		var o = Dots[i];
 		if(draw.type == "column"){
 			var h = arr[i] /256 * height;
-			ctx.fillRect( w *i,height-h , w*0.6,h);
+			ctx.fillRect( w *i,height-h , cw , h);
+			ctx.save();
+			ctx.fillStyle = "rgba(0,0,0,0.8)";
+			ctx.fillRect( w *i,height-(o.cap+capH)  , cw , capH);
+			ctx.restore();
+			o.cap--;
+			if(o.cap<0){
+				o.cap = 0;
+			}
+			if(h>0 && o.cap<h+gap){
+				o.cap = h+gap>height-capH?height-capH:h+gap;
+			}
 		}else if(draw.type == "dot"){
 			ctx.beginPath();
-			var o = Dots[i];
-			var r = arr[i] /256 * 50;
+			var r = 7 + arr[i] /256 * (height>width?width:height)/10;
 			ctx.arc(o.x,o.y,r,0,Math.PI*2,true);
 			var gra = ctx.createRadialGradient(o.x,o.y,0,o.x,o.y,r);
 			gra.addColorStop(0,o.color);
 			gra.addColorStop(1,"rgba(255,255,255,0)");
+			// gra.addColorStop(1,"rgba(0,0,0,0)");
 			ctx.fillStyle = gra;
 			ctx.fill();
+			o.x = o.x-r>width?-r:o.x+o.dx;
 			// ctx.strokeStyle = "#000";
 			// ctx.stroke();
 		}

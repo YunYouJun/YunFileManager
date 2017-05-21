@@ -2,7 +2,6 @@
 Online File Manage
 ---
 # Basic Function
----
 1. Basic Managerment about Files and Folders.
 2. View code online.
 3. Listen to music online.(Have Music Effect)

@@ -123,7 +123,12 @@ function copyFile($filename,$dstname){
 	return $mes;
 }
 
+// 剪切文件
 function cutFile($filename,$dstname){
+	if($dstname==$GLOBALS['path'].'/'.'\\'){
+		echo $GLOBALS['rootpath'];
+		$dstname=$GLOBALS['rootpath'];
+	}
 	if(file_exists($dstname)){
 		if(!file_exists($dstname."/".basename($filename))){
 			if(rename($filename,$dstname."/".basename($filename))){
@@ -151,38 +156,40 @@ function cutFile($filename,$dstname){
 function uploadFile($fileInfo,$path,$maxSize=20971520){
 	//判断错误号
 	//最大20Mb
-	if (! file_exists ($fileInfo['tmp_name'])) {
-	if($fileInfo['error']==UPLOAD_ERR_OK){
-		//文件是否是通过HTTP POST方式上传上来的
-		if(is_uploaded_file($fileInfo['tmp_name'])){
-			//上传文件的文件名，只允许上传jpeg|jpg、png、gif、txt的文件
-			//$allowExt=array("gif","jpeg","jpg","png","txt");
-			//取消限制
-			// $ext=getExt($fileInfo['name']);
-			// $uniqid=getUniqidName();
-			// $destination=$path."/".pathinfo($fileInfo['name'],PATHINFO_FILENAME)."_".$uniqid.".".$ext;
-			$destination=$path."/".$fileInfo['name'];
-			//又是windows上中文转码
-			$destination=mb_convert_encoding($destination, 'GBK','UTF-8');
-			// if(in_array($ext,$allowExt)){
-				if($fileInfo['size']<=$maxSize){
-					if(move_uploaded_file($fileInfo['tmp_name'], $destination)){
-						$mes="UploadFileSuccess";
+	// print_r($fileInfo);
+	$destination=$path."/".$fileInfo['name'];
+	if (! file_exists ($destination)) {
+		if($fileInfo['error']==UPLOAD_ERR_OK){
+			//文件是否是通过HTTP POST方式上传上来的
+			if(is_uploaded_file($fileInfo['tmp_name'])){
+				//上传文件的文件名，只允许上传jpeg|jpg、png、gif、txt的文件
+				//$allowExt=array("gif","jpeg","jpg","png","txt");
+				//取消限制
+				// $ext=getExt($fileInfo['name']);
+				// $uniqid=getUniqidName();
+				// $destination=$path."/".pathinfo($fileInfo['name'],PATHINFO_FILENAME)."_".$uniqid.".".$ext;
+				// $destination=$path."/".$fileInfo['name'];
+				//又是windows上中文转码
+				$destination=mb_convert_encoding($destination, 'GBK','UTF-8');
+				// if(in_array($ext,$allowExt)){
+					if($fileInfo['size']<=$maxSize){
+						if(move_uploaded_file($fileInfo['tmp_name'], $destination)){
+							$mes="UploadFileSuccess";
+						}else{
+							$mes="UploadFileFail";
+						}
 					}else{
-						$mes="UploadFileFail";
+						$mes="FileOversize";
 					}
-				}else{
-					$mes="FileOversize";
-				}
-			// }else{
-			// 	$mes="IllegalFileType";
-			// }
+				// }else{
+				// 	$mes="IllegalFileType";
+				// }
+			}else{
+				$mes="NotUploadByHttpPost";
+			}
 		}else{
-			$mes="NotUploadByHttpPost";
-		}
-	}else{
-		$mes="error:".$fileInfo['error'];
-		}
+			$mes="error:".$fileInfo['error'];
+			}
 	}else{
 		$mes = 'FileExists';
 	}
@@ -264,7 +271,7 @@ function isImage($val){
 		return false;
 	}
 }
-//是否为文本
+//判断是否为文本
 function isTxt($val){
 	$ext=strtolower(end(explode(".",$val)));
 	$txtExt=array("txt");
@@ -274,7 +281,7 @@ function isTxt($val){
 		return false;
 	}
 }
-//是否为代码
+//判断是否为代码
 function isCode($val){
 	$ext=strtolower(end(explode(".",$val)));
 	$codeExt=array("php","css","html","js","c","cpp","cs","java","py","h","jsp","asp");
@@ -284,7 +291,7 @@ function isCode($val){
 		return false;
 	}
 }
-//是否为音乐
+//判断是否为音乐
 function isMusic($val){
 	$ext=strtolower(end(explode(".",$val)));
 	$musicExt=array("mp3","wav","ogg");
@@ -294,7 +301,7 @@ function isMusic($val){
 		return false;
 	}
 }
-//是否为视频
+//判断是否为视频
 function isVideo($val){
 	$ext=strtolower(end(explode(".",$val)));
 	$videoExt=array("avi","mp4","mov","wmv");

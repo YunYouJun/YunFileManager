@@ -3,7 +3,7 @@ require_once '../include.php';
 $act=$_REQUEST['act'];
 @$path=$_REQUEST['path'];
 @$filename=$_REQUEST['filename'];
-$fileTitle=isset($_REQUEST['fileTitle'])?$_REQUEST['fileTitle']:basename($_REQUEST['filename']);
+@$fileTitle=isset($_REQUEST['fileTitle'])?$_REQUEST['fileTitle']:basename($_REQUEST['filename']);
 
 //下载文件操作  囧，因为header前面不能有其他输出，就提到最前面了！
 if($act==="downFile"){

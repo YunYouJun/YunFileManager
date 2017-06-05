@@ -31,6 +31,7 @@ function getExt($filename){
 function getUniqidName($length=10){
 	return substr(md5(uniqid(microtime(true),true)),0,$length);
 }
+//几种不同样式的警告框（成功，警告，失败，信息）
 //几种样式的警告框 =。= 贼好看
 function showSuccessMsg($mes){
 	echo '<div class="alert alert-success alert-dismissible text-center" role="alert">
@@ -53,7 +54,7 @@ function showInfoMsg($mes){
 				  <strong>提示：</strong> '.$mes.' </div>';
 }
 
-//根据mes  显示不同警告框
+//根据返回的mes信息，显示不同警告框。
 function showAlertMes($mes){
 	switch ($mes) {
 		case 'CreateFileSuccess':
@@ -168,6 +169,7 @@ function showAlertMes($mes){
 	}
 }
 
+// 显示当前路径信息，并提供跳转链接。
 function showPath($path){
 	$path = str_replace("../file","",$path);
 	$folderPath = "../file";

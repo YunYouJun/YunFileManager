@@ -63,7 +63,7 @@ tr.searchFile:hover{
 
 /*按钮部分*/
 .btn-default{
-	background-color: rgba(255,255,255,0.7);
+	background-color: rgba(255,255,255,0.8);
 }
 .btn:hover{
 	background-color: rgba(0,0,0,0.9);

@@ -54,53 +54,7 @@ $redirect="index.php?path={$path}";
 <?php include('../common/header.php');?>
 <?php include('../common/navbar.php'); ?>
 <?php showPath($path);?>
-<form action="index.php" method="post" class="text-center" enctype="multipart/form-data">
 
-	<div id="createFolder"  class="form-inline"  style="display:none;">
-			<div class="form-group">
-			<label for="dirname">请输入文件夹名称</label>
-				<input type="text" id="dirname" class="form-control" name="dirname" />
-				<input type="hidden" name="path"  value="<?php echo $path;?>"/>
-				<input type="hidden"  name="act"  value="createFolder"/>
-			</div>
-			<button class="btn btn-default" type="submit">
-				<span class="fa fa-folder-open"></span> 创建文件夹
-			</button>
-	</div>
-	<div id="createFile" class="form-inline"  style="display:none;">
-		<div class="form-group">
-		 	<label for="filename">请输入文件名称</label>
-			<input type="text" class="form-control" id="filename" name="filename" />
-			<input type="hidden" name="path" value="<?php echo $path;?>"/>
-			<input type="hidden"  name="act" value="createFile" />	
-		</div>
-		<button class="btn btn-default" type="submit">
-			<span class="fa fa-file"></span> 创建文件
-		</button>
-	</div>
-	<div id="uploadFile" class="form-inline"  style="display:none;">
-		<div class="form-group">
-			<label for="myFile">请选择要上传的文件（最大 20 MB）：</label>
-			<input type="file" class="btn btn-default" class="file" name="myFile" id="myFile"  onchange="UploadFileName();" style="display: none;" />
-			<input type="hidden"  name="act" value="uploadFile"/>
-		</div>
-		<button class="btn btn-primary" id="chooseFile" type="button">
-			<span class="fa  fa-file"></span> 选择文件
-		</button>
-		<button class="btn btn-default" type="submit">
-			<span class="glyphicon glyphicon-cloud-upload"></span> 上传
-		</button>
-		<script type="text/javascript">
-		$('#chooseFile').click(function(){
-			$('#myFile').click();
-		});
-		function UploadFileName(){
-			var pathfilename = $('#myFile').val();
-			var filename = pathfilename.split("\\");
-			$('#chooseFile').text(filename[filename.length-1]);
-		}
-		</script>
-	</div>
 <div class="table-responsive">
 <table class="table table-hover">
 <thead>
@@ -125,7 +79,7 @@ if($info['file']){
 	$p=$path."/".$val;
 	$FileNameVal=mb_convert_encoding($val, 'UTF-8', 'UTF-8,GBK,GB2312,BIG5');
 	$p2=$path."/".$FileNameVal;
-	$OnlyFileName = explode('.', $FileNameVal);
+	$OnlyFileName = str_replace(".","",$FileNameVal);
 ?>
 	<tr align="center"
 <?php
@@ -172,15 +126,15 @@ if($keyword){
 		<td>
 		<div class="btn-group btn-group-xs" role="toolbar" aria-label="...">
 		<?php if(isImage($val)){ ?>	
-				<a class="btn btn-default" href="javascript:;" data-toggle="modal" data-target="#myModal<?php echo $OnlyFileName[0];?>">
+				<a class="btn btn-default" href="javascript:;" data-toggle="modal" data-target="#myModal<?php echo $OnlyFileName;?>">
 					<span class="glyphicon glyphicon-eye-open" title="查看"></span>
 				</a>
-				<div class="modal fade" id="myModal<?php echo $OnlyFileName[0];?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal fade" id="myModal<?php echo $OnlyFileName;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" style="width:90%;max-height:100%;padding-top: 20px;">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true" style="font-size: 300%;">&times;</span></button>
 							<div class="text-center">
-								<img style="max-width: 90%;" src="<?php echo $p2?>" alt=""/>
+								<img style="max-width: 90%;max-height: 90%;" src="<?php echo $p2?>" alt=""/>
 							</div>
 						</div>
 				</div>
@@ -273,8 +227,7 @@ $i++;
 ?>
 	
 </table>
-<div class="table-responsive">
-</form>
+</div>
 
 <?php include('../common/footer.php');?>
 

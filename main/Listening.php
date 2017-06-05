@@ -74,7 +74,7 @@
        	</div>
        </div>
        <span class="input-group-btn">
-	      	<a class="btn btn-default" href="../main/doFileAction.php?act=downFile&path=<?php echo $path;?>&filename=<?php echo $filename;?>">
+	      	<a class="btn btn-default" href="../main/doFileAction.php?act=downFile&filename=<?php echo $filename;?>&fileTitle=<?php echo $fileTitle;?>">
 	       		<span class="glyphicon glyphicon-download-alt" title="下载"></span>
 	       	</a>
        </span>

@@ -8,3 +8,5 @@ set_include_path(".".PATH_SEPARATOR.ROOT."/lib".PATH_SEPARATOR.ROOT."/core".PATH
 require_once 'dir.func.php';
 require_once 'file.func.php';
 require_once 'common.func.php';
+
+$rootpath = '../file';

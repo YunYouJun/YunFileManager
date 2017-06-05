@@ -98,6 +98,7 @@ function renameFolder($oldname,$newname){
 	return $mes;
 }
 
+// 复制文件夹
 function copyFolder($src,$dst){
 	//echo $src,"---",$dst."----";
 	if(!file_exists($dst)){
@@ -169,14 +170,3 @@ function delFolder($path){
 	rmdir($path);
 	return "DelFolderSuccess";
 }
-
-
-
-
-
-
-
-
-
-
-

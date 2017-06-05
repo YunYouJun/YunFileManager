@@ -100,12 +100,15 @@ echo $str;
 	$mes=renameFile($filename,$newname);
 	redirect($mes,$redirect);
 }elseif($act=="delFile"){
+	// 删除文件
 	$mes=delFile($filename);
 	redirect($mes,$redirect);
 }elseif($act=="createFolder"){
+	// 创建文件夹
 	$mes=createFolder($path."/".$dirname);
 	redirect($mes,$redirect);
 }elseif($act=="renameFolder"){
+	// 输出重命名文件夹表单
 	$str=<<<EOF
 	<form class="form-inline navbar-form navbar-left" action="index.php?act=doRenameFolder" method="post"> 
 		<input type="text" class="form-control" name="newname" id="newnameFolder" placeholder="请填写新文件夹名称"/>
@@ -118,6 +121,7 @@ echo $str;
 EOF;
 echo $str;
 }elseif($act=="doRenameFolder"){
+	// 执行重命名文件夹操作
 	$newname=$_REQUEST['newname'];
 	//echo $newname,"-",$dirname,"-",$path;
 	$mes=renameFolder($dirname,$path."/".$newname);
@@ -135,8 +139,15 @@ echo $str;
 EOF;
 echo $str;
 }elseif($act=="doCopyFolder"){
+	// 执行复制文件夹操作
 	$dstname=$_REQUEST['dstname'];
-	$mes=copyFolder($dirname,$path."/".$dstname."/".basename($dirname));
+
+	if($dstname[0]=='/'){
+		$dstname = $rootpath."/".$dstname."/".basename($dirname);
+	}else{
+		$dstname = $path."/".$dstname."/".basename($dirname);
+	}
+	$mes=copyFolder($dirname,$dstname);
 	redirect($mes,$redirect);
 }elseif($act=="cutFolder"){
 			$str=<<<EOF
@@ -151,8 +162,14 @@ echo $str;
 EOF;
 echo $str;
 }elseif($act=="doCutFolder"){
+	// 剪切文件夹操作
 	$dstname=$_REQUEST['dstname'];
-	$mes=cutFolder($dirname,$path."/".$dstname);
+	if($dstname[0]=='/'){
+		$dstname = $rootpath."/".$dstname;
+	}else{
+		$dstname = $path."/".$dstname;
+	}
+	$mes=cutFolder($dirname,$dstname);
 	redirect($mes,$redirect);
 }elseif($act=="delFolder"){
 	//完成删除文件夹的操作
@@ -171,10 +188,18 @@ echo $str;
 EOF;
 echo $str;
 }elseif($act=="doCopyFile"){
+	// 执行复制文件操作
 	$dstname=$_REQUEST['dstname'];
-	$mes=copyFile($filename,$path."/".$dstname);
+	if($dstname[0]=='/'){
+		$dstname = $rootpath."/".$dstname;
+	}else{
+		$dstname = $path."/".$dstname;
+	}
+
+	$mes=copyFile($filename,$dstname);
 	redirect($mes,$redirect);
 }elseif($act=="cutFile"){
+	// 输出剪切文件夹表单
 				$str=<<<EOF
 	<form class="form-inline navbar-form navbar-left" action="index.php?act=doCutFile" method="post"> 
 		<input type="text" class="form-control" name="dstname" id="CutFiledstname" placeholder="填写剪切到的目录"/>
@@ -187,11 +212,17 @@ echo $str;
 EOF;
 echo $str;
 }elseif($act=="doCutFile"){
+	// 执行剪切文件夹操作
 	$dstname=$_REQUEST['dstname'];
-	$mes=cutFile($filename,$path."/".$dstname);
+	if($dstname[0]=='/'){
+		$dstname = $rootpath."/".$dstname;
+	}else{
+		$dstname = $path."/".$dstname;
+	}
+	$mes=cutFile($filename,$dstname);
 	redirect($mes,$redirect);
 }elseif($act=="uploadFile"){
-	// print_r($_FILES);
+	// 上传文件夹操作
 	if($_FILES['myFile']){
 		$fileInfo=$_FILES['myFile'];
 		$mes=uploadFile($fileInfo,$path);
